@@ -5,6 +5,7 @@ public class Player {
     private int score;
     private int wins;
     private int losses;
+    private int draws;
     private String playerType;
 
     public Player(String name, String playerType) {
@@ -12,6 +13,7 @@ public class Player {
         this.score = 0;
         this.wins = 0;
         this.losses = 0;
+        this.draws = 0;
         this.playerType = playerType;
     }
 
@@ -24,6 +26,10 @@ public class Player {
         this.losses = this.losses+1;
     }
 
+    public void increaseDraws(){
+
+    }
+
     public String getName() {
         return name;
     }
@@ -34,6 +40,7 @@ public class Player {
                 "\nPlayer type: " + playerType +
                 "\nScore: " + score +
                 "\nWins: " + wins +
-                "\nLosses: " + losses;
+                "\nLosses: " + losses +
+                "\nDraws: " + draws;
     }
 }
