@@ -61,6 +61,7 @@ public class InputHandler {
         while(true){
             while(!scanner.hasNextInt()){
                 System.out.println("Invalid input. Please enter a valid coordinate.");
+                scanner.nextLine();
             }
             int value = scanner.nextInt();
             scanner.nextLine();
