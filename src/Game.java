@@ -23,7 +23,7 @@ public class Game {
                 setPlayerMarker(currentPlayer);
                 System.out.println(currentPlayer.getName() + ", it is your turn.");
                 placeMarker(gameboard);
-                System.out.println(gameboard.printGameBoardSquares());
+                System.out.println(gameboard.printGameBoard());
                 running = checkState(gameboard);
                 switchPlayer();
             }
@@ -33,8 +33,8 @@ public class Game {
 
 
     public void initGame(GameBoard gameboard){
-        gameboard.generateGameBoardSquares();
-        System.out.println(gameboard.printGameBoardSquares());
+        gameboard.generateGameBoard();
+        System.out.println(gameboard.printGameBoard());
         randomizePlayer(players.get(0), players.get(1));
     }
 
@@ -78,16 +78,13 @@ public class Game {
             }
             System.out.println("Square already occupied");
         }
-            gameboard.getSquares().get(placement-1).setMarker(markerToPlace);
-            gameboard.getSquares().get(placement-1).setOccupied(true);
-            System.out.println(gameboard.getSquares().get(placement-1).getMarker());
-            System.out.println(gameboard.printGameBoardSquares());
-            System.out.println(gameboard.getSquares().get(placement-1).isOccupied());
+            gameboard.getGrid().get(placement-1).setMarker(markerToPlace);
+            gameboard.getGrid().get(placement-1).setOccupied(true);
 
     }
 
     public boolean isOccupied(GameBoard gameboard, int placement){
-        return gameboard.getSquares().get(placement-1).isOccupied();
+        return gameboard.getGrid().get(placement-1).isOccupied();
     }
 
     public boolean checkSquaresLeft(GameBoard gameboard){
