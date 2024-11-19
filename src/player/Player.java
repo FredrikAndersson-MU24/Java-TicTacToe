@@ -2,7 +2,6 @@ package player;
 
 public class Player {
     private String name;
-    private int score;
     private int wins;
     private int losses;
     private int draws;
@@ -10,7 +9,6 @@ public class Player {
 
     public Player(String name, String playerType) {
         this.name = name;
-        this.score = 0;
         this.wins = 0;
         this.losses = 0;
         this.draws = 0;
@@ -34,11 +32,14 @@ public class Player {
         return name;
     }
 
+    public int getWins() {
+        return wins;
+    }
+
     @Override
     public String toString() {
         return "\nName: " + name +
                 "\nPlayer type: " + playerType +
-                "\nScore: " + score +
                 "\nWins: " + wins +
                 "\nLosses: " + losses +
                 "\nDraws: " + draws;

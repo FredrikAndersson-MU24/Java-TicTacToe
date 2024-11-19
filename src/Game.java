@@ -13,10 +13,10 @@ public class Game {
     char markerToPlace;
     public Game(){
 
-        initPlayers();
+        setupPlayers();
         while(true){
             GameBoard gameboard = new GameBoard();
-            System.out.println(players.get(0).getName() + " vs. " + players.get(1).getName());
+            printStandings();
             boolean running = true;
             initGame(gameboard);
             while(running){
@@ -39,8 +39,8 @@ public class Game {
     }
 
     public void initPlayers(){
-        players.add(new HumanPlayer("Fredrik"));
-        players.add(new HumanPlayer("Alice"));
+        players.add(new HumanPlayer("Player1"));
+        players.add(new HumanPlayer("Player2"));
     }
 
     public void randomizePlayer(Player player1, Player player2){
@@ -68,14 +68,6 @@ public class Game {
         System.out.println(input);
     }
 
-    public void setPlayerMarker(Player player){
-        if(player.equals(players.get(0))){
-            markerToPlace = 'X';
-        }
-        else if(player.equals(players.get(1))){
-            markerToPlace = '¤';
-        }
-    }
 
     public void placeMarker(GameBoard gameboard){
         int placement;
@@ -116,6 +108,33 @@ public class Game {
         }
         return running;
     }
+
+
+    //Player setup//
+    public void setupPlayers(){
+        enterPlayerName("Player 1. ");
+        enterPlayerName("Player 2. ");
+    }
+
+    public void enterPlayerName(String string){
+        System.out.println(string + "Enter your name: ");
+        players.add(new HumanPlayer(InputHandler.getString()));
+    }
+
+    public void setPlayerMarker(Player player){
+        if(player.equals(players.get(0))){
+            markerToPlace = 'X';
+        }
+        else if(player.equals(players.get(1))){
+            markerToPlace = '¤';
+        }
+    }
+
+    private static void printStandings() {
+        System.out.println(players.get(0).getName() + " " + players.get(0).getWins() + " vs. "
+                + players.get(1).getName() + " " + players.get(1).getWins());
+    }
+
 
 
 }
