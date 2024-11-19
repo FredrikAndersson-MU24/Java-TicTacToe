@@ -27,7 +27,7 @@ public class Player {
     }
 
     public void increaseDraws(){
-
+        this.draws = this.draws+1;
     }
 
     public String getName() {

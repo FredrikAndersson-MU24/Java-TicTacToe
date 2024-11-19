@@ -16,19 +16,16 @@ public class Game {
         initPlayers();
         while(true){
             GameBoard gameboard = new GameBoard();
-            System.out.println("START");
+            System.out.println(players.get(0).getName() + " vs. " + players.get(1).getName());
             boolean running = true;
             initGame(gameboard);
-            System.out.println(players.get(0).toString());
-            System.out.println(players.get(1).toString());
             while(running){
                 setPlayerMarker(currentPlayer);
                 System.out.println(currentPlayer.getName() + ", it is your turn.");
                 placeMarker(gameboard);
                 System.out.println(gameboard.printGameBoardSquares());
-                switchPlayer();
                 running = checkState(gameboard);
-                System.out.println(running);
+                switchPlayer();
             }
         }
 
@@ -76,7 +73,7 @@ public class Game {
             markerToPlace = 'X';
         }
         else if(player.equals(players.get(1))){
-            markerToPlace = 'O';
+            markerToPlace = '¤';
         }
     }
 
@@ -84,7 +81,7 @@ public class Game {
         int placement;
         while(true){
             placement = InputHandler.getMarkerPlacementAsInt();
-            if(!isPlacementOccupied(gameboard, placement)){
+            if(!isOccupied(gameboard, placement)){
                 break;
             }
             System.out.println("Square already occupied");
@@ -97,7 +94,7 @@ public class Game {
 
     }
 
-    public boolean isPlacementOccupied(GameBoard gameboard, int placement){
+    public boolean isOccupied(GameBoard gameboard, int placement){
         return gameboard.getSquares().get(placement-1).isOccupied();
     }
 
@@ -116,7 +113,6 @@ public class Game {
             System.out.println(currentPlayer.getName() + ", wins!");
             currentPlayer.increaseWins();
             running = false;
-
         }
         return running;
     }
