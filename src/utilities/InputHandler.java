@@ -9,10 +9,9 @@ public class InputHandler {
 
 
     public static boolean getBoolean(){
-        boolean result = false;
+        boolean result;
         while(true){
             String input = scanner.nextLine();
-            scanner.nextLine();
             if(input.toLowerCase().startsWith("y")){
                 result = true;
                 break;
@@ -30,22 +29,6 @@ public class InputHandler {
     public static String getString(){
         return scanner.nextLine();
     }
-
-//    public static String getmarkerPlacement(){
-//        while(true){
-//            String input = scanner.nextLine();
-//            scanner.nextLine();
-//            while(!input.toLowerCase().startsWith("a") || !input.toLowerCase().startsWith("b") || !input.toLowerCase().startsWith("c")){
-//                System.out.println("Invalid input. Please enter a valid marker placement.");
-//            }
-//
-//            if(input.length() == 2){
-//                if(input.toLowerCase().startsWith("a")){}
-//            }
-//
-//            System.out.println("Please enter a valid coordinate.");
-//        }
-//    }
 
     public static int getMarkerPlacementAsInt(){
         System.out.println("Enter marker placement as integer: ");

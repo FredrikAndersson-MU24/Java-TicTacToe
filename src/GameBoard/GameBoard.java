@@ -7,7 +7,7 @@ public class GameBoard {
     List<Square> grid = new ArrayList<>();
     List<String> separation = new ArrayList<>();
 
-
+    // Adds instances of Square to fill a 3x3 grid to the grid List.
     public void generateGameBoard(){
         grid.add(new Square(' '));
         grid.add(new Square( ' '));
@@ -21,7 +21,7 @@ public class GameBoard {
         separation.add("----+---+----");
         separation.add("-------------");
     }
-
+    //Print a 3x3 grid. .getMarker() gets each individual square's marker-state to present a placed marker or empty.
     public String printGameBoard() {
         return  "\n" + separation.get(1) +
                 "\n| " + grid.get(0).getMarker() + " | " + grid.get(1).getMarker() + " | " +  grid.get(2).getMarker() + " |" +
@@ -36,6 +36,7 @@ public class GameBoard {
         return grid;
     }
 
+    //Checks if all squares of the grid are occupied. Returns false if there are still unoccupied squares.
     public boolean checkIfAllOccupied(){
         boolean result = true;
         for(Square square : grid){
@@ -47,6 +48,7 @@ public class GameBoard {
         return result;
     }
 
+    //Checks if the most recent input resulted in the player getting three in a row. Returns true if it is a win
     public boolean checkIfWin(char marker){
         boolean isWin = false;
         //Row 1

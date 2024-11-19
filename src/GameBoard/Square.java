@@ -17,13 +17,11 @@ public class Square {
         return occupied;
     }
 
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
+    public void toggleOccupied() {
+        this.occupied = !occupied;
     }
 
     public void setMarker(char marker) {
         this.marker = marker;
     }
-
-
 }
