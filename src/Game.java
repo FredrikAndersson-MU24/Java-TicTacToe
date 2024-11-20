@@ -13,12 +13,13 @@ public class Game {
     private static Player currentPlayer;
     private static Player otherPlayer;
     private static boolean mainMenu = true;
-    private static boolean game = true;
+//   private static boolean game = true;
     char markerToPlace;
     public Game(){
         while(mainMenu){
             players.clear();
             mainMenu();
+            boolean game = true;
             while(game){
                 GameBoard gameboard = new GameBoard();
                 boolean round = true;
@@ -179,10 +180,10 @@ public class Game {
                 players.add(new CpuPlayer("CPU 1", 'O'));
                 players.add(new CpuPlayer("CPU 2", 'X'));
                 break;
-            case 0:
-                mainMenu = false;
-                game = false;
-                break;
+// TODO           case 0:
+//                mainMenu = false;
+//                game = false;
+//                break;
             default:
                 System.out.println("Invalid input. Try again.");
         }

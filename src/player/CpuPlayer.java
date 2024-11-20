@@ -9,8 +9,6 @@ import java.util.Random;
 
 public class CpuPlayer extends Player {
 
-    private boolean isFirst = false;
-
     public CpuPlayer(String name, char marker) {
         super(name, "CPU", marker);
     }
@@ -370,3 +368,4 @@ public class CpuPlayer extends Player {
 }
 
 // TODO 23558 chars, 375 line breaks
+// TODO 21663 chars
