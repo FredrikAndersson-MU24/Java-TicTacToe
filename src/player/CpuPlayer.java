@@ -1,8 +1,6 @@
 package player;
 
 import gameboard.GameBoard;
-import gameboard.Square;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -67,15 +65,15 @@ public class CpuPlayer extends Player {
                     setMarkerAndToggle(gameboard, 2, thisMarker);
             }else if (gameboard.getGrid().get(3).getMarker() == thisMarker && !gameboard.getGrid().get(6).isOccupied()) {
                     setMarkerAndToggle(gameboard, 6, thisMarker);
-            }else if(gameboard.getGrid().get(2).getMarker() == otherMarker && gameboard.getGrid().get(4).getMarker() == otherMarker){
+            }else if(isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker)){
                 setMarkerAndToggle(gameboard, 6, thisMarker);
-            }else if(gameboard.getGrid().get(2).getMarker() == otherMarker && gameboard.getGrid().get(6).getMarker() == otherMarker) {
+            }else if(isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 6, otherMarker)) {
                 setMarkerAndToggle(gameboard, 4, thisMarker);
-            } else if(gameboard.getGrid().get(5).getMarker() == otherMarker && gameboard.getGrid().get(8).getMarker() == otherMarker){
+            } else if(isOccupiedBy(gameboard, 5, otherMarker) && isOccupiedBy(gameboard, 8, otherMarker)){
                 setMarkerAndToggle(gameboard, 2, thisMarker);
-            }else if(gameboard.getGrid().get(2).getMarker() == otherMarker && gameboard.getGrid().get(5).getMarker() == otherMarker){
+            }else if(isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 5, otherMarker)){
                 setMarkerAndToggle(gameboard, 8, thisMarker);
-            }else if(gameboard.getGrid().get(2).getMarker() == otherMarker && gameboard.getGrid().get(8).getMarker() == otherMarker){
+            }else if(isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 8, otherMarker)){
                 setMarkerAndToggle(gameboard, 5, thisMarker);
             } else if (gameboard.getGrid().get(1).getMarker() == thisMarker) {
                 if (!gameboard.getGrid().get(2).isOccupied()) {
@@ -110,11 +108,33 @@ public class CpuPlayer extends Player {
 
         // Fourth turn
         if (list.size() == 3) {
-            if (gameboard.getGrid().get(2).getMarker() == otherMarker && gameboard.getGrid().get(4).getMarker() == otherMarker && !gameboard.getGrid().get(6).isOccupied()) {
+            if (isOccupiedBy(gameboard, 0, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 8)) {
+                setMarkerAndToggle(gameboard, 8, thisMarker);
+            } else if (isOccupiedBy(gameboard, 1, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 7)) {
+                setMarkerAndToggle(gameboard, 7, thisMarker);
+            } else if (isOccupiedBy(gameboard, 2, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 6)) {
                 setMarkerAndToggle(gameboard, 6, thisMarker);
-            } else if (gameboard.getGrid().get(3).getMarker() == otherMarker && gameboard.getGrid().get(4).getMarker() == otherMarker){
+            } else if (isOccupiedBy(gameboard, 3, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 5)) {
                 setMarkerAndToggle(gameboard, 5, thisMarker);
-            } else if (gameboard.getGrid().get(6).getMarker() == otherMarker && gameboard.getGrid().get(8).getMarker() == otherMarker && !gameboard.getGrid().get(7).isOccupied()){
+            } else if (isOccupiedBy(gameboard, 5, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 3)) {
+                setMarkerAndToggle(gameboard, 3, thisMarker);
+            } else if (isOccupiedBy(gameboard, 6, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 2)) {
+                setMarkerAndToggle(gameboard, 2, thisMarker);
+            } else if (isOccupiedBy(gameboard, 7, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 1)) {
+                setMarkerAndToggle(gameboard, 1, thisMarker);
+            } else if (isOccupiedBy(gameboard, 8, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 0)) {
+                setMarkerAndToggle(gameboard, 0, thisMarker);
+            } else if (isOccupiedBy(gameboard, 5, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 3)) {
+                setMarkerAndToggle(gameboard, 3, thisMarker);
+            } else if (isOccupiedBy(gameboard, 6, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 2)) {
+                setMarkerAndToggle(gameboard, 2, thisMarker);
+            } else if (isOccupiedBy(gameboard, 7, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 1)) {
+                setMarkerAndToggle(gameboard, 1, thisMarker);
+            } else if (isOccupiedBy(gameboard, 8, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 0)) {
+                setMarkerAndToggle(gameboard, 0, thisMarker);
+            }else if (isOccupiedBy(gameboard, 3, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker)){
+                setMarkerAndToggle(gameboard, 5, thisMarker);
+            } else if (isOccupiedBy(gameboard, 6, otherMarker) && isOccupiedBy(gameboard, 8, otherMarker) && !gameboard.getGrid().get(7).isOccupied()){
                 setMarkerAndToggle(gameboard, 7, thisMarker);
             } else if (gameboard.getGrid().get(6).getMarker() == thisMarker) {
                 if (!gameboard.getGrid().get(3).isOccupied()) {
@@ -126,8 +146,6 @@ public class CpuPlayer extends Player {
                     } else if (!gameboard.getGrid().get(5).isOccupied()) {
                         setMarkerAndToggle(gameboard, 5, thisMarker);
                     }
-                } else {
-                    System.out.println("FAIL");
                 }
             } else if (gameboard.getGrid().get(1).getMarker() == thisMarker) {
                 if (!gameboard.getGrid().get(8).isOccupied()) {
@@ -136,11 +154,7 @@ public class CpuPlayer extends Player {
                     setMarkerAndToggle(gameboard, 7, thisMarker);
                 } else if (!gameboard.getGrid().get(5).isOccupied()) {
                     setMarkerAndToggle(gameboard, 5, thisMarker);
-                }else {
-                    System.out.println("FAIL");
                 }
-            } else {
-                System.out.println("FAIL");
             }
 
         }
@@ -172,52 +186,51 @@ public class CpuPlayer extends Player {
         }
         // Second turn
         if (list.size() == 6) {
-            if((
-                isOccupiedBy(gameboard, 1, otherMarker) && isOccupiedBy(gameboard, 2,otherMarker))
-            || (isOccupiedBy(gameboard, 3, otherMarker) && isOccupiedBy(gameboard, 6,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker) && !isOccupied(gameboard, 0))){
+            if(isOccupiedByTwo(gameboard, 1, 2, otherMarker)
+            || isOccupiedByTwo(gameboard, 3, 6, otherMarker)
+            || isOccupiedByTwoNotThird(gameboard, 4, 8, 0, otherMarker)){
                 setMarkerAndToggle(gameboard,0,thisMarker);
-            } else if((
-                isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 2,otherMarker))
-            || (isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))
-            || (isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 6,otherMarker))
-            || (isOccupiedBy(gameboard, 3, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 7,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))
-            || (isOccupiedBy(gameboard, 5, otherMarker) && isOccupiedBy(gameboard, 6,otherMarker))){
+            } else if(
+               isOccupiedByTwo(gameboard, 0, 2, otherMarker)
+            || isOccupiedByTwo(gameboard, 0, 8, otherMarker)
+            || isOccupiedByTwo(gameboard, 2, 6, otherMarker)
+            || isOccupiedByTwo(gameboard, 3, 8, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 7, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 8, otherMarker)
+            || isOccupiedByTwo(gameboard, 5, 6, otherMarker)){
                 setMarkerAndToggle(gameboard,1,thisMarker);
             }else if(
-                isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 1,otherMarker)
-            || (isOccupiedBy(gameboard, 1, otherMarker) && isOccupiedBy(gameboard, 3,otherMarker))
-            || (isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 6,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))){
+               isOccupiedByTwo(gameboard, 0, 1, otherMarker)
+            || isOccupiedByTwo(gameboard, 1, 3, otherMarker)
+            || isOccupiedByTwo(gameboard, 0, 8, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 6, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 8, otherMarker)){
                 setMarkerAndToggle(gameboard,2,thisMarker);
             }else if(
-                isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 6,otherMarker)
-            || (isOccupiedBy(gameboard, 1, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))
-            || (isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 7,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 5,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))){
+               isOccupiedByTwo(gameboard, 0, 6, otherMarker)
+            || isOccupiedByTwo(gameboard, 1, 8, otherMarker)
+            || isOccupiedByTwo(gameboard, 2, 7, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 5, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 8, otherMarker)){
                 setMarkerAndToggle(gameboard,3,thisMarker);
             }else if(
-                isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 7,otherMarker)
-            || (isOccupiedBy(gameboard, 1, otherMarker) && isOccupiedBy(gameboard, 6,otherMarker))
-            || (isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))
-            || (isOccupiedBy(gameboard, 3, otherMarker) && isOccupiedBy(gameboard, 4,otherMarker))
-            || (isOccupiedBy(gameboard, 4, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))){
+                    isOccupiedByTwo(gameboard, 0, 7, otherMarker)
+            || isOccupiedByTwo(gameboard, 1, 6, otherMarker)
+            || isOccupiedByTwo(gameboard, 2, 8, otherMarker)
+            || isOccupiedByTwo(gameboard, 3, 4, otherMarker)
+            || isOccupiedByTwo(gameboard, 4, 8, otherMarker)){
                 setMarkerAndToggle(gameboard,5,thisMarker);
             }else if(
-                isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 3,otherMarker)
-            || (isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 4,otherMarker))
-            || (isOccupiedBy(gameboard, 7, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))){
+                    isOccupiedByTwo(gameboard, 0, 3, otherMarker)
+            || isOccupiedByTwo(gameboard, 2, 4, otherMarker)
+            || isOccupiedByTwo(gameboard, 7, 8, otherMarker)){
                 setMarkerAndToggle(gameboard,6,thisMarker);
             }else if(
-                isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 5,otherMarker)
-            || (isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 3,otherMarker))
-            || (isOccupiedBy(gameboard, 1, otherMarker) && isOccupiedBy(gameboard, 4,otherMarker))
-            || (isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 5,otherMarker))
-            || (isOccupiedBy(gameboard, 6, otherMarker) && isOccupiedBy(gameboard, 8,otherMarker))){
+                    isOccupiedByTwo(gameboard, 0, 5, otherMarker)
+            || isOccupiedByTwo(gameboard, 2, 3, otherMarker)
+            || isOccupiedByTwo(gameboard, 1, 4, otherMarker)
+            || isOccupiedByTwo(gameboard, 0, 5, otherMarker)
+            || isOccupiedByTwo(gameboard, 6, 8, otherMarker)){
                 setMarkerAndToggle(gameboard,7,thisMarker);
             } else if(isOccupiedBy(gameboard, 0, thisMarker) && !isOccupiedBy(gameboard, 1,otherMarker)){
                 setMarkerAndToggle(gameboard,1,thisMarker);
@@ -229,41 +242,41 @@ public class CpuPlayer extends Player {
         }
         // Third turn
         if (list.size() == 4) {
-            if (isOccupiedBy(gameboard, 0, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 8)) {
+            if (isOccupiedByTwoNotThird(gameboard,0,4,8,thisMarker)) {
                 setMarkerAndToggle(gameboard, 8, thisMarker);
-            } else if (isOccupiedBy(gameboard, 1, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 7)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,1,4,7,thisMarker)) {
                 setMarkerAndToggle(gameboard, 7, thisMarker);
-            } else if (isOccupiedBy(gameboard, 2, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 6)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,2,4,6,thisMarker)) {
                 setMarkerAndToggle(gameboard, 6, thisMarker);
-            } else if (isOccupiedBy(gameboard, 3, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 5)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,3,4,5,thisMarker)) {
                 setMarkerAndToggle(gameboard, 5, thisMarker);
-            } else if (isOccupiedBy(gameboard, 5, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 3)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,5,4,3,thisMarker)) {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
-            } else if (isOccupiedBy(gameboard, 6, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 2)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,6,4,2,thisMarker)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
-            } else if (isOccupiedBy(gameboard, 7, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 1)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,7,4,1,thisMarker)) {
                 setMarkerAndToggle(gameboard, 1, thisMarker);
-            } else if (isOccupiedBy(gameboard, 8, thisMarker) && isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 0)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,8,4,0,thisMarker)) {
                 setMarkerAndToggle(gameboard, 0, thisMarker);
-            } else if (isOccupiedBy(gameboard, 5, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 3)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,5,4,3,otherMarker)) {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
-            } else if (isOccupiedBy(gameboard, 6, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 2)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,6,4,2,otherMarker)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
-            } else if (isOccupiedBy(gameboard, 7, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 1)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,7,4,1,otherMarker)) {
                 setMarkerAndToggle(gameboard, 1, thisMarker);
-            } else if (isOccupiedBy(gameboard, 8, otherMarker) && isOccupiedBy(gameboard, 4, otherMarker) && !isOccupied(gameboard, 0)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,8,4,0,otherMarker)) {
                 setMarkerAndToggle(gameboard, 0, thisMarker);
-            }else if (isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 2, otherMarker) && !isOccupied(gameboard, 1)) {
+            }else if (isOccupiedByTwoNotThird(gameboard,0,2,1,otherMarker)) {
                 setMarkerAndToggle(gameboard, 1, thisMarker);
-            } else if (isOccupiedBy(gameboard, 0, otherMarker) && isOccupiedBy(gameboard, 6, otherMarker) && !isOccupied(gameboard, 3)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,0,6,3,otherMarker)) {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
-            } else if (isOccupiedBy(gameboard, 6, otherMarker) && isOccupiedBy(gameboard, 8, otherMarker) && !isOccupied(gameboard, 7)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,6,8,7,otherMarker)) {
                 setMarkerAndToggle(gameboard, 7, thisMarker);
-            } else if (isOccupiedBy(gameboard, 2, otherMarker) && isOccupiedBy(gameboard, 8, otherMarker) && !isOccupied(gameboard, 5)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,2,8,5,otherMarker)) {
                 setMarkerAndToggle(gameboard, 5, thisMarker);
-            } else if (isOccupiedBy(gameboard, 7, otherMarker) && isOccupiedBy(gameboard, 8, otherMarker) && !isOccupied(gameboard, 6)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,7,8,6,otherMarker)) {
                 setMarkerAndToggle(gameboard, 6, thisMarker);
-            } else if (isOccupiedBy(gameboard, 6, otherMarker) && isOccupiedBy(gameboard, 7, otherMarker) && !isOccupied(gameboard, 8)) {
+            } else if (isOccupiedByTwoNotThird(gameboard,6,7,8,otherMarker)) {
                 setMarkerAndToggle(gameboard, 8, thisMarker);
             } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 5)) {
                 setMarkerAndToggle(gameboard, 5, thisMarker);
@@ -333,8 +346,6 @@ public class CpuPlayer extends Player {
             }
     }
 
-
-
     public void setMarkerAndToggle(GameBoard gameboard, int num, char marker){
         gameboard.getGrid().get(num).setMarker(marker);
         gameboard.getGrid().get(num).toggleOccupied();
@@ -343,17 +354,19 @@ public class CpuPlayer extends Player {
     public boolean isOccupiedBy(GameBoard gameboard, int num, char marker){
         return gameboard.getGrid().get(num).getMarker() == marker;
     }
+
     public boolean isOccupied(GameBoard gameboard, int num){
         return gameboard.getGrid().get(num).isOccupied();
     }
 
-
+    public boolean isOccupiedByTwo (GameBoard gameboard, int first, int second, char marker){
+        return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker);
     }
 
+    public boolean isOccupiedByTwoNotThird (GameBoard gameboard, int first, int second, int third, char marker){
+        return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker) && !isOccupied(gameboard, third);
+    }
 
+}
 
-
-
-
-
-
+// TODO 23558 chars, 375 line breaks
