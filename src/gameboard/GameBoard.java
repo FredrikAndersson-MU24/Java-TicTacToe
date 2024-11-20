@@ -1,4 +1,4 @@
-package GameBoard;
+package gameboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class GameBoard {
     // Adds instances of Square to fill a 3x3 grid to the grid List.
     public void generateGameBoard(){
         grid.add(new Square(' '));
-        grid.add(new Square( ' '));
+        grid.add(new Square(' '));
         grid.add(new Square(' '));
         grid.add(new Square(' '));
         grid.add(new Square(' '));

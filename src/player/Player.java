@@ -6,13 +6,15 @@ public class Player {
     private int losses;
     private int draws;
     private String playerType;
+    private char marker;
 
-    public Player(String name, String playerType) {
+    public Player(String name, String playerType, char marker) {
         this.name = name;
         this.wins = 0;
         this.losses = 0;
         this.draws = 0;
         this.playerType = playerType;
+        this.marker = marker;
     }
 
 
@@ -34,6 +36,18 @@ public class Player {
 
     public int getWins() {
         return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public int getDraws() {
+        return draws;
+    }
+
+    public char getMarker() {
+        return marker;
     }
 
     @Override

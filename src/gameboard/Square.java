@@ -1,4 +1,11 @@
-package GameBoard;
+package gameboard;
+
+//////////////////////////////////////////////////////////
+//  Instances of this class represent one single        //
+//  square of the grid that the game board consists of. //
+//////////////////////////////////////////////////////////
+
+
 
 public class Square {
     private boolean occupied;
