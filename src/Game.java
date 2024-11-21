@@ -150,10 +150,13 @@ public class Game {
     //////////////////////////////
     private static void printStandings() {
         System.out.println(
-                player1.getName()  + " vs. " + player2.getName() +
-            "\n" + player1.getWins() + " WINS " + player2.getWins() +
-            "\n" + player1.getLosses() + " LOSSES " + player2.getLosses() +
-            "\n" + player1.getDraws() + " DRAWS " + player2.getDraws());
+             "-------------------------------------" +
+             "\n\t" +  player1.getName()  +  "\t\t\t\t\t" +player2.getName() +
+             "\n\t\t\t\t  vs.\t\t" +
+            "\n\t\t" + player1.getWins() + "\t\t WINS\t\t" + player2.getWins() +
+            "\n\t\t" + player1.getLosses() + "\t\tLOSSES\t\t" + player2.getLosses() +
+            "\n\t\t" + player1.getDraws() + "\t\t DRAW  \t\t" + player2.getDraws() +
+             "\n-------------------------------------");
     }
 
     //////////////////////////////
