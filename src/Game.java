@@ -13,12 +13,12 @@ public class Game {
     private static Player currentPlayer;
     private static Player otherPlayer;
     private static boolean mainMenu = true;
-    private static boolean game = true;
-    private static boolean difficulty = true;
+    private static boolean difficulty = false;
     char markerToPlace;
     public Game(){
         while(mainMenu){
             players.clear();
+            boolean game = true;
             mainMenu();
             while(game){
                 GameBoard gameboard = new GameBoard();
@@ -177,7 +177,6 @@ public class Game {
                 break;
             case 0:
                 mainMenu = false;
-                game = false;
                 break;
             default:
                 System.out.println("Invalid input. Try again.");
@@ -198,6 +197,7 @@ public class Game {
         boolean bool = true;
         switch(i){
             case 1:
+                bool = true;
                 break;
             case 2:
                 bool = false;
