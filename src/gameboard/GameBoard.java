@@ -5,31 +5,26 @@ import java.util.List;
 
 public class GameBoard {
     List<Square> grid = new ArrayList<>();
-    List<String> separation = new ArrayList<>();
+    List<String> separations = new ArrayList<>();
 
     // Adds instances of Square to fill a 3x3 grid to the grid List.
     public void generateGameBoard(){
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        grid.add(new Square(' '));
-        separation.add("----+---+----");
-        separation.add("-------------");
+        for(int i = 0; i <=8; i++){
+            grid.add(new Square(' '));
+        }
+        separations.add("----+---+----"); // These might seem unnecessary, I just added them to practice using lists
+        separations.add("-------------");
     }
-    //Print a 3x3 grid. .getMarker() gets each individual square's marker-state to present a placed marker or empty.
+
+    //Print a 3x3 grid. square() gets each individual square's marker-state to present a placed marker or empty square.
     public String printGameBoard() {
-        return  "\n" + separation.get(1) +
-                "\n| " + grid.get(0).getMarker() + " | " + grid.get(1).getMarker() + " | " +  grid.get(2).getMarker() + " |" +
-                "\n" + separation.get(0) +
-                "\n| " + grid.get(3).getMarker() + " | " +  grid.get(4).getMarker() + " | " +  grid.get(5).getMarker() + " |"  +
-                "\n" + separation.get(0) +
-                "\n| " + grid.get(6).getMarker() + " | " + grid.get(7).getMarker() + " | " + grid.get(8).getMarker() + " |" +
-                "\n" + separation.get(1);
+        return  "\n" + separations.get(1) +
+                "\n| " + square(0) + " | " + square(1) + " | " + square(2) + " |" +
+                "\n" + separations.get(0) +
+                "\n| " + square(3) + " | " + square(4) + " | " + square(5) + " |" +
+                "\n" + separations.get(0) +
+                "\n| " + square(6) + " | " + square(7) + " | " + square(8) + " |" +
+                "\n" + separations.get(1);
     }
 
     public List<Square> getGrid() {
@@ -52,37 +47,49 @@ public class GameBoard {
     public boolean checkIfWin(char marker){
         boolean isWin = false;
         //Row 1
-        if(grid.get(0).getMarker() == marker && grid.get(1).getMarker() == marker && grid.get(2).getMarker() == marker){
+        if(isARow(0,1,2, marker)){
             isWin = true;
         }
         //Row 2
-        if(grid.get(3).getMarker() == marker && grid.get(4).getMarker() == marker && grid.get(5).getMarker() == marker){
+        if(isARow(3,4,5, marker)){
             isWin = true;
         }
         //Row 3
-        if(grid.get(6).getMarker() == marker && grid.get(7).getMarker() == marker && grid.get(8).getMarker() == marker){
+        if(isARow(6,7,8, marker)){
             isWin = true;
         }
         //Column 1
-        if(grid.get(0).getMarker() == marker && grid.get(3).getMarker() == marker && grid.get(6).getMarker() == marker){
+        if(isARow(0,3,6, marker)){
             isWin = true;
         }
         //Column 2
-        if(grid.get(1).getMarker() == marker && grid.get(4).getMarker() == marker && grid.get(7).getMarker() == marker){
+        if(isARow(1,4,7, marker)){
             isWin = true;
         }
         //Column 3
-        if(grid.get(2).getMarker() == marker && grid.get(5).getMarker() == marker && grid.get(8).getMarker() == marker){
-            isWin = true;
-        }
-        //Diagonal from lower left
-        if(grid.get(0).getMarker() == marker && grid.get(4).getMarker() == marker && grid.get(8).getMarker() == marker){
+        if(isARow(2,5,8, marker)){
             isWin = true;
         }
         //Diagonal from upper left
-        if(grid.get(6).getMarker() == marker && grid.get(4).getMarker() == marker && grid.get(2).getMarker() == marker){
+        if(isARow(0,4,8, marker)){
             isWin = true;
         }
-        return  isWin;
+        //Diagonal from lower left
+        if(isARow(6,4,2, marker)){
+            isWin = true;
+        }
+        return isWin;
     }
+
+    // Takes three ints and a char as arguments to check if the char is in the square represented by each int.
+    // Used to check if there are three identical chars in a row.
+    public boolean isARow(int first, int second, int third, char marker){
+        return (grid.get(first).getMarker() == marker && grid.get(second).getMarker() == marker && grid.get(third).getMarker() == marker);
+    }
+
+    // Increases readability for printGameBoard().
+    public char square(int num){
+    return grid.get(num).getMarker();
+    }
+
 }

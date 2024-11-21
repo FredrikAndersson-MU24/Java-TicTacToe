@@ -10,29 +10,20 @@ public class CpuPlayer extends Player {
     public CpuPlayer(String name, char marker) {
         super(name, "CPU", marker);
     }
+
+    // The easier CPU opponent alternative. Places markers randomly.
     public void easyMode(GameBoard gameboard, char thisMarker) {
         randomPlacement(gameboard, thisMarker);
     }
 
-    public void randomPlacement(GameBoard gameboard, char thisMarker) {
-        List<Integer> remains = new ArrayList<>();
-        for (int i = 0; i < gameboard.getGrid().size(); i++) {
-            if (!gameboard.getGrid().get(i).isOccupied()) {
-                remains.add(gameboard.getGrid().indexOf(gameboard.getGrid().get(i)));
-            }
-        }
-        Random rand = new Random();
-        setMarkerAndToggle(gameboard, remains.get(rand.nextInt(remains.size())), thisMarker);
-    }
-
-
-    //////////////////////////////////////////////////////////////////////
-    //  Okay, here is my attempt at making a method for the CPUPlayer   //
-    //  that tries to win, rather than just randomly placing markers.   //
-    //  It's a mess :D                                                  //
-    //  But as far as I've managed to test it it seems to work.         //
-    //  Strategy from the tic-tac-toe wikipedia page.                   //
-    //////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    //  Okay, here is my attempt at making a method for the CPUPlayer           //
+    //  that tries to win, rather than just randomly placing markers.           //
+    //  It's a mess :D                                                          //
+    //  But as far as I've managed to test it it seems to work.                 //
+    //  Strategy from the tic-tac-toe wikipedia page.                           //
+    //  This could probably be cleaned up significantly with smarter methods.   //
+    //////////////////////////////////////////////////////////////////////////////
     public void hardMode(GameBoard gameboard, char thisMarker, char otherMarker) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < gameboard.getGrid().size(); i++) {
@@ -67,8 +58,42 @@ public class CpuPlayer extends Player {
         if (list.size() == 5) {
             if (gameboard.getGrid().get(1).getMarker() == thisMarker && !gameboard.getGrid().get(2).isOccupied()) {
                     setMarkerAndToggle(gameboard, 2, thisMarker);
+            }else if (gameboard.getGrid().get(2).getMarker() == thisMarker && !gameboard.getGrid().get(1).isOccupied()) {
+                setMarkerAndToggle(gameboard, 1, thisMarker);
             }else if (gameboard.getGrid().get(3).getMarker() == thisMarker && !gameboard.getGrid().get(6).isOccupied()) {
-                    setMarkerAndToggle(gameboard, 6, thisMarker);
+                setMarkerAndToggle(gameboard, 6, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 0, 4, 8, thisMarker)) {
+                setMarkerAndToggle(gameboard, 8, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 1, 4, 7, thisMarker)) {
+                setMarkerAndToggle(gameboard, 7, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 2, 4, 6, thisMarker)) {
+                setMarkerAndToggle(gameboard, 6, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 3, 4, 5, thisMarker)) {
+                setMarkerAndToggle(gameboard, 5, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 5, 4, 3, thisMarker)) {
+                setMarkerAndToggle(gameboard, 3, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 6, 4, 2, thisMarker)) {
+                setMarkerAndToggle(gameboard, 2, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 7, 4, 1, thisMarker)) {
+                setMarkerAndToggle(gameboard, 1, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 8, 4, 0, thisMarker)) {
+                setMarkerAndToggle(gameboard, 0, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 5, 4, 3, otherMarker)) {
+                setMarkerAndToggle(gameboard, 3, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 6, 4, 2, otherMarker)) {
+                setMarkerAndToggle(gameboard, 2, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 1, 4, 7, otherMarker)) {
+                setMarkerAndToggle(gameboard, 7, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 7, 4, 1, otherMarker)) {
+                setMarkerAndToggle(gameboard, 1, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 8, 4, 0, otherMarker)) {
+                setMarkerAndToggle(gameboard, 0, thisMarker);
+            }else if (twoOccupiedOneNotAnd(gameboard, 3, 4, 5, otherMarker)){
+                setMarkerAndToggle(gameboard, 5, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 6, 8, 7, otherMarker)){
+                setMarkerAndToggle(gameboard, 7, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard, 1, 2, 0, otherMarker)){
+                setMarkerAndToggle(gameboard, 0, thisMarker);
             }else if(twoOccupiedAnd(gameboard, 2, 4, otherMarker)){
                 setMarkerAndToggle(gameboard, 6, thisMarker);
             }else if(twoOccupiedAnd(gameboard, 2, 6, otherMarker)){
@@ -105,6 +130,8 @@ public class CpuPlayer extends Player {
                 } else if (!gameboard.getGrid().get(7).isOccupied()) {
                     setMarkerAndToggle(gameboard, 7, thisMarker);
                 }
+            } else if (!isOccupied(gameboard, 4)){
+                setMarkerAndToggle(gameboard, 4, thisMarker);
             }
         }
         // Fourth turn
@@ -134,6 +161,8 @@ public class CpuPlayer extends Player {
             } else if (twoOccupiedOneNotAnd(gameboard, 8, 4, 0, otherMarker)) {
                 setMarkerAndToggle(gameboard, 0, thisMarker);
             }else if (twoOccupiedOneNotAnd(gameboard, 3, 4, 5, otherMarker)){
+                setMarkerAndToggle(gameboard, 5, thisMarker);
+            }else if (twoOccupiedOneNotAnd(gameboard, 2, 8, 5, otherMarker)){
                 setMarkerAndToggle(gameboard, 5, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard, 6, 8, 7, otherMarker)){
                 setMarkerAndToggle(gameboard, 7, thisMarker);
@@ -243,6 +272,8 @@ public class CpuPlayer extends Player {
                 setMarkerAndToggle(gameboard, 8, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,1,4,7,thisMarker)) {
                 setMarkerAndToggle(gameboard, 7, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard,0,1,2,thisMarker)) {
+                setMarkerAndToggle(gameboard, 2, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,2,4,6,thisMarker)) {
                 setMarkerAndToggle(gameboard, 6, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,3,4,5,thisMarker)) {
@@ -257,6 +288,10 @@ public class CpuPlayer extends Player {
                 setMarkerAndToggle(gameboard, 0, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,5,4,3,otherMarker)) {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard,2,4,6,otherMarker)) {
+                setMarkerAndToggle(gameboard, 6, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard,1,4,7,otherMarker)) {
+                setMarkerAndToggle(gameboard, 7, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,6,4,2,otherMarker)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,7,4,1,otherMarker)) {
@@ -365,6 +400,17 @@ public class CpuPlayer extends Player {
     public boolean twoOccupiedOneNotAnd(GameBoard gameboard, int first, int second, int third, char marker){
         return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker) && !isOccupied(gameboard, third);
     }
+
+    // This is used to randomly place marker depending on which squares are left unoccupied.
+    // Used in easyMode() and as a last resort in the fourth turn if CPU starts second, as draw should be the only possibility
+    public void randomPlacement(GameBoard gameboard, char thisMarker) {
+        List<Integer> remains = new ArrayList<>();
+        for (int i = 0; i < gameboard.getGrid().size(); i++) {
+            if (!gameboard.getGrid().get(i).isOccupied()) {
+                remains.add(gameboard.getGrid().indexOf(gameboard.getGrid().get(i)));
+            }
+        }
+        Random rand = new Random();
+        setMarkerAndToggle(gameboard, remains.get(rand.nextInt(remains.size())), thisMarker);
+    }
 }
-// TODO 23558 chars, 375 line breaks
-// TODO 20231 chars
