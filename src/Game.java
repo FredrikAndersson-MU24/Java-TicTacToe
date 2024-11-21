@@ -13,13 +13,13 @@ public class Game {
     private static Player currentPlayer;
     private static Player otherPlayer;
     private static boolean mainMenu = true;
-//   private static boolean game = true;
+   private static boolean game = true;
+    private static boolean difficulty = true;
     char markerToPlace;
     public Game(){
         while(mainMenu){
             players.clear();
             mainMenu();
-            boolean game = true;
             while(game){
                 GameBoard gameboard = new GameBoard();
                 boolean round = true;
@@ -40,15 +40,12 @@ public class Game {
         }
     }
 
-
     // Initiates the most basic parts to get the game upp and running.
     public void initGame(GameBoard gameboard){
         gameboard.generateGameBoard();
         System.out.println(gameboard.printGameBoard());
-//        currentPlayer = players.get(0);
         randomizePlayer(players.get(0), players.get(1));
     }
-
 
     // Handle the player placing their marker. Check if the square is occupied and place the marker if it is not.
     public void placeMarker(GameBoard gameboard){
@@ -65,12 +62,16 @@ public class Game {
             gameboard.getGrid().get(placement-1).toggleOccupied();
         }
         if(currentPlayer instanceof CpuPlayer){
-            ((CpuPlayer) currentPlayer).hardMode(gameboard, currentPlayer.getMarker(), otherPlayer.getMarker());
+            if(difficulty){
+                ((CpuPlayer) currentPlayer).easyMode(gameboard, currentPlayer.getMarker());
+            } else {
+                ((CpuPlayer) currentPlayer).hardMode(gameboard, currentPlayer.getMarker(), otherPlayer.getMarker());
+
+            }
         }
     }
 
-
-    //      Check the state of the game, if someone has won or the board is full
+    // Check the state of the game, if someone has won or the board is full
     public boolean checkState(GameBoard gameboard){
         boolean running = true;
         if(gameboard.checkIfWin(currentPlayer.getMarker())){
@@ -89,7 +90,6 @@ public class Game {
     //////////////////////////////////////
     //         Player related           //
     //////////////////////////////////////
-
     // Determines if there are one or two human players
     public void setupPlayers(int numPlayers){
         if(numPlayers == 1){
@@ -101,14 +101,11 @@ public class Game {
             enterPlayerName("Player 2. ");
         }
     }
-
-
     // Let the player enter their name
     public void enterPlayerName(String string){
         System.out.println(string + "Enter your name: ");
         players.add(new HumanPlayer(InputHandler.getString()));
     }
-
     // Let the player choose their marker
     //TODO add functionality to choose a marker
     public void setPlayerMarker(Player player){
@@ -119,7 +116,6 @@ public class Game {
             markerToPlace = '¤';
         }
     }
-
     // A coin toss to see who starts the game
     public void randomizePlayer(Player player1, Player player2){
         int random = InputHandler.getRandomIntInRange(0,1);
@@ -132,7 +128,6 @@ public class Game {
             otherPlayer = player1;
         }
     }
-
     // Switches the active player. Used at the end of each round.
     public void switchPlayer(){
         if(currentPlayer == players.get(0)){
@@ -144,7 +139,6 @@ public class Game {
             otherPlayer = players.get(1);
         }
     }
-
 
     //////////////////////////////
     //      "Scoreboard"        //
@@ -172,6 +166,7 @@ public class Game {
         switch(input){
             case 1:
                 setupPlayers(1);
+                difficulty = chooseDifficulty();
                 break;
             case 2:
                 setupPlayers(2);
@@ -180,19 +175,35 @@ public class Game {
                 players.add(new CpuPlayer("CPU 1", 'O'));
                 players.add(new CpuPlayer("CPU 2", 'X'));
                 break;
-// TODO           case 0:
-//                mainMenu = false;
-//                game = false;
-//                break;
+            case 0:
+                mainMenu = false;
+                game = false;
+                break;
             default:
                 System.out.println("Invalid input. Try again.");
         }
     }
-
     // End of round menu
     public boolean playAgain(){
         System.out.println("Do you want to play again? (Y/N)");
         return InputHandler.getBoolean();
+    }
+
+    // Difficulty
+    public boolean chooseDifficulty(){
+        System.out.println("Please select difficulty level:");
+        System.out.println("1 - Easy");
+        System.out.println("2 - Hard");
+        int i = InputHandler.getIntInRange(1,2);
+        boolean bool = true;
+        switch(i){
+            case 1:
+                break;
+            case 2:
+                bool = false;
+                break;
+        }
+        return bool;
     }
 
 }
