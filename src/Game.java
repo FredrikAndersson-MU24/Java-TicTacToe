@@ -15,36 +15,43 @@ public class Game {
     private static boolean mainMenu = true;
     private static boolean difficulty = false;
     private static char markerToPlace;
+
     public Game(){
         while(mainMenu){
-            players.clear();
-            boolean game = true;
-            mainMenu();
-            while(game){
-                GameBoard gameboard = new GameBoard();
-                boolean round = true;
-                initGame(gameboard);
-                while(round){
-                    setPlayerMarker(currentPlayer);
-                    System.out.println(currentPlayer.getName() + ", it is your turn.");
-                    placeMarker(gameboard);
-                    System.out.println(gameboard.printGameBoard());
-                    round = checkState(gameboard);
-                    switchPlayer();
-                    if(!round){
-                        printStandings();
-                        game = playAgain();
-                    }
-                }
-            }
+            run();
         }
     }
 
-    // Initiates the most basic parts to get the game upp and running.
-    public void initGame(GameBoard gameboard){
-        gameboard.generateGameBoard();
-        System.out.println(gameboard.printGameBoard());
-        randomizePlayer(players.get(0), players.get(1));
+    // Clear the player list and print out the main menu. The rest of the game is launched from the main menu.
+    public void run(){
+        players.clear();
+        mainMenu();
+        }
+
+    //This handles each round. After a round has finished a prompt appears to decide wether to keep playing or not.
+    // If no, return to main menu.
+    public void round(){
+        boolean game = true;
+        while(game) {
+            GameBoard gameboard = new GameBoard();
+            boolean round = true;
+            gameboard.generateGameBoard();
+            System.out.println(gameboard.printGameBoard());
+            randomizePlayer(players.get(0), players.get(1));
+//            initGame(gameboard);
+            while (round) {
+                setPlayerMarker(currentPlayer);
+                System.out.println(currentPlayer.getName() + ", it is your turn.");
+                placeMarker(gameboard);
+                System.out.println(gameboard.printGameBoard());
+                round = checkState(gameboard);
+                switchPlayer();
+                if (!round) {
+                    printStandings();
+                    game = playAgain();
+                }
+            }
+        }
     }
 
     // Handle the player placing their marker. Check if the square is occupied and place the marker if it is not.
@@ -162,24 +169,25 @@ public class Game {
         System.out.println("2 - Human vs Human");
         System.out.println("3 - CPU vs CPU");
         System.out.println("0 - Quit");
-        int input = InputHandler.getIntInRange(0,3);
-        switch(input){
+        int choice = InputHandler.getIntInRange(0,3);
+        switch(choice){
             case 1:
                 setupPlayers(1);
                 difficulty = chooseDifficulty();
+                round();
                 break;
             case 2:
                 setupPlayers(2);
+                round();
                 break;
             case 3:
                 players.add(new CpuPlayer("CPU 1", 'O'));
                 players.add(new CpuPlayer("CPU 2", 'X'));
+                round();
                 break;
             case 0:
                 mainMenu = false;
                 break;
-            default:
-                System.out.println("Invalid input. Try again.");
         }
     }
     // End of round menu
