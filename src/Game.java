@@ -4,12 +4,10 @@ import player.HumanPlayer;
 import player.Player;
 import utilities.InputHandler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Game {
 
-    private static List<Player> players = new ArrayList<>();
+    private static Player player1;
+    private static Player player2;
     private static Player currentPlayer;
     private static Player otherPlayer;
     private static boolean mainMenu = true;
@@ -24,7 +22,6 @@ public class Game {
 
     // Clear the player list and print out the main menu. The rest of the game is launched from the main menu.
     public void run(){
-        players.clear();
         mainMenu();
         }
 
@@ -37,8 +34,7 @@ public class Game {
             boolean round = true;
             gameboard.generateGameBoard();
             System.out.println(gameboard.printGameBoard());
-            randomizePlayer(players.get(0), players.get(1));
-//            initGame(gameboard);
+            randomizeStartingPlayer();
             while (round) {
                 setPlayerMarker(currentPlayer);
                 System.out.println(currentPlayer.getName() + ", it is your turn.");
@@ -73,7 +69,6 @@ public class Game {
                 ((CpuPlayer) currentPlayer).easyMode(gameboard, currentPlayer.getMarker());
             } else {
                 ((CpuPlayer) currentPlayer).hardMode(gameboard, currentPlayer.getMarker(), otherPlayer.getMarker());
-
             }
         }
     }
@@ -88,7 +83,8 @@ public class Game {
             running = false;
         }else if(gameboard.checkIfAllOccupied()){
             System.out.println("No squares left. It's a draw!");
-            players.forEach(player -> player.increaseDraws());
+            player1.increaseDraws();
+            player2.increaseDraws();
             running = false;
         }
         return running;
@@ -100,31 +96,33 @@ public class Game {
     // Determines if there are one or two human players
     public void setupPlayers(int numPlayers){
         if(numPlayers == 1){
-            enterPlayerName("Player 1. ");
-            players.add(new CpuPlayer("CPU", '¤'));
+            player1 = new HumanPlayer(enterPlayerName("Player 1. "), 'X');
+            player2 = new CpuPlayer("CPU", '¤');
         }
         if(numPlayers == 2){
-            enterPlayerName("Player 1. ");
-            enterPlayerName("Player 2. ");
+            player1 = new HumanPlayer(enterPlayerName("Player 1. "), 'X');
+            player2 = new HumanPlayer(enterPlayerName("Player 2. "), 'O');
         }
     }
-    // Let the player enter their name
-    public void enterPlayerName(String string){
+
+    // Let the human player enter their name
+    public String enterPlayerName(String string){
         System.out.println(string + "Enter your name: ");
-        players.add(new HumanPlayer(InputHandler.getString()));
+        return InputHandler.getString();
     }
+
     // Let the player choose their marker
     //TODO add functionality to choose a marker
     public void setPlayerMarker(Player player){
-        if(player.equals(players.get(0))){
-            markerToPlace = 'X';
+        if(player.equals(player1)){
+            markerToPlace = player1.getMarker();
         }
-        else if(player.equals(players.get(1))){
-            markerToPlace = '¤';
+        else if(player.equals(player2)){
+            markerToPlace = player2.getMarker();
         }
     }
     // A coin toss to see who starts the game
-    public void randomizePlayer(Player player1, Player player2){
+    public void randomizeStartingPlayer(){
         int random = InputHandler.getRandomIntInRange(0,1);
         if(random == 0){
             currentPlayer = player1;
@@ -137,13 +135,13 @@ public class Game {
     }
     // Switches the active player. Used at the end of each round.
     public void switchPlayer(){
-        if(currentPlayer == players.get(0)){
-            currentPlayer = players.get(1);
-            otherPlayer = players.get(0);
+        if(currentPlayer == player1){
+            currentPlayer = player2;
+            otherPlayer = player1;
         }
-        else if(currentPlayer == players.get(1)){
-            currentPlayer = players.get(0);
-            otherPlayer = players.get(1);
+        else if(currentPlayer == player2){
+            currentPlayer = player1;
+            otherPlayer = player2;
         }
     }
 
@@ -152,10 +150,10 @@ public class Game {
     //////////////////////////////
     private static void printStandings() {
         System.out.println(
-                   players.get(0).getName()  + " vs. " + players.get(1).getName() +
-            "\n" + players.get(0).getWins() + " WINS " + players.get(1).getWins() +
-            "\n" + players.get(0).getLosses() + " LOSSES " + players.get(1).getLosses() +
-            "\n" + players.get(0).getDraws() + " DRAWS " + players.get(1).getDraws());
+                player1.getName()  + " vs. " + player2.getName() +
+            "\n" + player1.getWins() + " WINS " + player2.getWins() +
+            "\n" + player1.getLosses() + " LOSSES " + player2.getLosses() +
+            "\n" + player1.getDraws() + " DRAWS " + player2.getDraws());
     }
 
     //////////////////////////////
@@ -181,8 +179,8 @@ public class Game {
                 round();
                 break;
             case 3:
-                players.add(new CpuPlayer("CPU 1", 'O'));
-                players.add(new CpuPlayer("CPU 2", 'X'));
+                player1 = new CpuPlayer("CPU 1", 'O');
+                player2 = new CpuPlayer("CPU 2", 'X');
                 round();
                 break;
             case 0:

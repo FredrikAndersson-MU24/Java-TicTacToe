@@ -1,7 +1,7 @@
 package player;
 
 public class HumanPlayer extends Player{
-    public HumanPlayer(String name) {
-        super(name, "Human", 'X');
+    public HumanPlayer(String name, char marker) {
+        super(name, "Human", marker);
     }
 }
