@@ -14,7 +14,7 @@ public class Game {
     private static Player otherPlayer;
     private static boolean mainMenu = true;
     private static boolean difficulty = false;
-    char markerToPlace;
+    private static char markerToPlace;
     public Game(){
         while(mainMenu){
             players.clear();
