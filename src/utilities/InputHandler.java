@@ -43,7 +43,7 @@ public class InputHandler {
     public static int getIntInRange(int min, int max){
         while(true){
             while(!scanner.hasNextInt()){
-                System.out.println("Invalid input. Please enter a valid coordinate.");
+                System.out.println("Invalid input. Please enter a valid integer.");
                 scanner.nextLine();
             }
             int value = scanner.nextInt();
@@ -51,7 +51,7 @@ public class InputHandler {
             if(value >= min && value <= max){
                 return value;
             }
-            System.out.println("Invalid input. Please enter a valid coordinate.");
+            System.out.println("Invalid input. Please enter a valid integer.");
         }
     }
 
