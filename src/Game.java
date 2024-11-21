@@ -13,7 +13,7 @@ public class Game {
     private static Player currentPlayer;
     private static Player otherPlayer;
     private static boolean mainMenu = true;
-   private static boolean game = true;
+    private static boolean game = true;
     private static boolean difficulty = true;
     char markerToPlace;
     public Game(){
@@ -189,7 +189,7 @@ public class Game {
         return InputHandler.getBoolean();
     }
 
-    // Difficulty
+    // Difficulty level
     public boolean chooseDifficulty(){
         System.out.println("Please select difficulty level:");
         System.out.println("1 - Easy");
@@ -205,5 +205,4 @@ public class Game {
         }
         return bool;
     }
-
 }

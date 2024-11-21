@@ -277,13 +277,17 @@ public class CpuPlayer extends Player {
                 setMarkerAndToggle(gameboard, 8, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,0,1,2,otherMarker)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
-            }else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 5)) {
+            } else if (twoOccupiedOneNotAnd(gameboard,0,3,6,otherMarker)) {
+                setMarkerAndToggle(gameboard, 6, thisMarker);
+            } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 5)) {
                 setMarkerAndToggle(gameboard, 5, thisMarker);
             } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 3)) {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
             } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 1)) {
                 setMarkerAndToggle(gameboard, 1, thisMarker);
             } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 2)) {
+                setMarkerAndToggle(gameboard, 2, thisMarker);
+            } else if (isOccupiedBy(gameboard, 0, thisMarker) && !isOccupied(gameboard, 2)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
             } else if (!isOccupied(gameboard, 0)) {
                 setMarkerAndToggle(gameboard, 0, thisMarker);
