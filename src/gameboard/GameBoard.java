@@ -84,7 +84,7 @@ public class GameBoard {
     // Takes three ints and a char as arguments to check if the char is in the square represented by each int.
     // Used to check if there are three identical chars in a row.
     public boolean isARow(int first, int second, int third, char marker){
-        return (grid.get(first).getMarker() == marker && grid.get(second).getMarker() == marker && grid.get(third).getMarker() == marker);
+        return (square(first) == marker && square(second) == marker && square(third) == marker);
     }
 
     // Increases readability for printGameBoard().
