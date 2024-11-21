@@ -65,7 +65,7 @@ public class Game {
             gameboard.getGrid().get(placement-1).toggleOccupied();
         }
         if(currentPlayer instanceof CpuPlayer){
-            ((CpuPlayer) currentPlayer).placeMarker(gameboard, currentPlayer.getMarker(), otherPlayer.getMarker());
+            ((CpuPlayer) currentPlayer).hardMode(gameboard, currentPlayer.getMarker(), otherPlayer.getMarker());
         }
     }
 
