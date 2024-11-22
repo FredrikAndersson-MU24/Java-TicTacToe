@@ -11,7 +11,6 @@ public class Game {
     private static Player currentPlayer;
     private static Player otherPlayer;
     private static boolean mainMenu = true;
-    private static boolean difficulty = false;
     private static char markerToPlace;
 
     public Game(){
@@ -45,7 +44,6 @@ public class Game {
                 if (!round) {
                     printStandings();
                     game = playAgain();
-                    difficulty = (game ? difficulty : false); // reset difficulty //TODO Build a better method for handling difficulty in CPUPlayer
                 }
             }
         }
@@ -171,15 +169,14 @@ public class Game {
         switch(choice){
             case 1:
                 setupPlayers(1);
-//                difficulty = chooseDifficulty();
                 round();
                 break;
             case 2:
                 setupPlayers(2);
                 round();
                 break;
-// This was intended for testing purposes, to work out kinks in the hardMode method, but I kept it to show the
-// difference between the "difficulty" levels if you put Easy vs Hard for example.
+            // This was intended for testing purposes only, to work out kinks in the hardMode method, but I kept it to show the
+            // difference between the "difficulty" levels if you put Easy vs Hard for example.
             case 3:
                 player1 = new CpuPlayer("CPU 1", 'O', chooseDifficulty());
                 player2 = new CpuPlayer("CPU 2", 'X', chooseDifficulty());
