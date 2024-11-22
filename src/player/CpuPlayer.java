@@ -130,7 +130,7 @@ public class CpuPlayer extends Player {
                 } else if (!gameboard.getGrid().get(7).isOccupied()) {
                     setMarkerAndToggle(gameboard, 7, thisMarker);
                 }
-            } else if (!isOccupied(gameboard, 4)){
+            } else if (notOccupied(gameboard, 4)){
                 setMarkerAndToggle(gameboard, 4, thisMarker);
             }
         }
@@ -204,7 +204,7 @@ public class CpuPlayer extends Player {
         //////////////////////////////////////
         // First turn
         if (list.size() == 8) {
-            if(!isOccupied(gameboard,4)){
+            if(notOccupied(gameboard, 4)){
                 setMarkerAndToggle(gameboard, 4, thisMarker);
             } else {
                 setMarkerAndToggle(gameboard,0,thisMarker);
@@ -314,17 +314,17 @@ public class CpuPlayer extends Player {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,0,3,6,otherMarker)) {
                 setMarkerAndToggle(gameboard, 6, thisMarker);
-            } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 5)) {
+            } else if (isOccupiedBy(gameboard, 4, thisMarker) && notOccupied(gameboard, 5)) {
                 setMarkerAndToggle(gameboard, 5, thisMarker);
-            } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 3)) {
+            } else if (isOccupiedBy(gameboard, 4, thisMarker) && notOccupied(gameboard, 3)) {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
-            } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 1)) {
+            } else if (isOccupiedBy(gameboard, 4, thisMarker) && notOccupied(gameboard, 1)) {
                 setMarkerAndToggle(gameboard, 1, thisMarker);
-            } else if (isOccupiedBy(gameboard, 4, thisMarker) && !isOccupied(gameboard, 2)) {
+            } else if (isOccupiedBy(gameboard, 4, thisMarker) && notOccupied(gameboard, 2)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
-            } else if (isOccupiedBy(gameboard, 0, thisMarker) && !isOccupied(gameboard, 2)) {
+            } else if (isOccupiedBy(gameboard, 0, thisMarker) && notOccupied(gameboard, 2)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
-            } else if (!isOccupied(gameboard, 0)) {
+            } else if (notOccupied(gameboard, 0)) {
                 setMarkerAndToggle(gameboard, 0, thisMarker);
             } else {
                 System.out.println("FAIL THIRD"); // Print if there is a scenario that has not been foreseen
@@ -360,7 +360,7 @@ public class CpuPlayer extends Player {
                 setMarkerAndToggle(gameboard,6,thisMarker);
             } else if(twoOccupiedOneNotAnd(gameboard, 0, 3, 6, otherMarker)){
                 setMarkerAndToggle(gameboard,6,thisMarker);
-            } else if(!isOccupied(gameboard,0)) {
+            } else if(notOccupied(gameboard, 0)) {
                 setMarkerAndToggle(gameboard,0,thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard, 7, 4, 1, otherMarker)) {
                 setMarkerAndToggle(gameboard, 1, thisMarker);
@@ -389,8 +389,8 @@ public class CpuPlayer extends Player {
         return gameboard.getGrid().get(num).getMarker() == marker;
     }
 
-    public boolean isOccupied(GameBoard gameboard, int num){
-        return gameboard.getGrid().get(num).isOccupied();
+    public boolean notOccupied(GameBoard gameboard, int num){
+        return !gameboard.getGrid().get(num).isOccupied();
     }
 
     public boolean twoOccupiedAnd(GameBoard gameboard, int first, int second, char marker){
@@ -398,7 +398,7 @@ public class CpuPlayer extends Player {
     }
 
     public boolean twoOccupiedOneNotAnd(GameBoard gameboard, int first, int second, int third, char marker){
-        return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker) && !isOccupied(gameboard, third);
+        return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker) && notOccupied(gameboard, third);
     }
 
     // This is used to randomly place marker depending on which squares are left unoccupied.

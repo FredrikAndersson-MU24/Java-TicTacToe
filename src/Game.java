@@ -45,6 +45,7 @@ public class Game {
                 if (!round) {
                     printStandings();
                     game = playAgain();
+                    difficulty = (game ? difficulty : false); // reset difficulty //TODO Build a better method for handling difficulty in CPUPlayer
                 }
             }
         }
