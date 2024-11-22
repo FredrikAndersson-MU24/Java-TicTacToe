@@ -171,8 +171,8 @@ public class Game {
                 "ends in a draw.\n" +
                 "You can challenge a friend or play against the computer. If you decide to \n" +
                 "try to beat the computer, you can pick between two skill levels to face.\n" +
-                "\nPlacing your marker is done by entering a number from 1 to 9. \n" +
-                "See the schematic below:" +
+                "\nPlacing your marker is done by entering a number from 1 to 9. As shown in \n" +
+                "the schematic below:" +
                 "\n-------------" +
                 "\n| 1 | 2 | 3 |" +
                 "\n----+---+----" +
