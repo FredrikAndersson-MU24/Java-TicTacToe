@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class CpuPlayer extends Player {
 
-    private boolean proLevel;
+    private final boolean proLevel;
 
     // Constructor for the CPUPlayer
     public CpuPlayer(String name, char marker, boolean proLevel) {
@@ -234,8 +234,8 @@ public class CpuPlayer extends Player {
                 setMarkerAndToggle(gameboard, 3, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,2,4,6,otherMarker)) {
                 setMarkerAndToggle(gameboard, 6, thisMarker);
-            } else if (twoOccupiedOneNotAnd(gameboard,1,4,7,otherMarker)) {
-                setMarkerAndToggle(gameboard, 7, thisMarker);
+            } else if (twoOccupiedOneNotAnd(gameboard,1,2,0,otherMarker)) {
+                setMarkerAndToggle(gameboard, 0, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,6,4,2,otherMarker)) {
                 setMarkerAndToggle(gameboard, 2, thisMarker);
             } else if (twoOccupiedOneNotAnd(gameboard,7,4,1,otherMarker)) {

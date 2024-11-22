@@ -156,32 +156,38 @@ public class Game {
     // Rules
     public void rules(){
         System.out.println(
-                "Rules\n" +
-                "Thank you for playing Tic-Tac-Toe!\n" +
-                "In Tic-Tac-Toe two players face off against each other. " +
-                "\nThe aim of the game is to get three of your markers in a row,\n" +
-                "and at the same time make sure your opponent does not get three in a row.\n" +
-                "\nThe game board is made up of a 3x3 grid of squares. Each square can be \n" +
-                "populated by one marker. Once a marker has been placed, it can not be changed.\n" +
-                "At the start of a round a coin toss determines which player starts placing \n" +
-                "their marker. The players then take turns placing markers until one of them\n" +
-                "gets three markers in a row or there are no more empty squares on the board. \n" +
-                "Once there are three identical markers in a row on a horizontal, vertical or \n" +
-                "diagonal line, that player wins and the round is finished. \n" +
-                "If neither player gets three in a row before the board is filled, the game \n" +
-                "ends in a draw.\n" +
-                "You can challenge a friend or play against the computer. If you decide to \n" +
-                "try to beat the computer, you can pick between two skill levels to face.\n" +
-                "\nPlacing your marker is done by entering a number from 1 to 9. As shown in \n" +
-                "the schematic below:" +
-                "\n-------------" +
-                "\n| 1 | 2 | 3 |" +
-                "\n----+---+----" +
-                "\n| 4 | 5 | 6 |" +
-                "\n----+---+----" +
-                "\n| 7 | 8 | 9 |" +
-                "\n-------------" +
-                "\n\n0 - Return to main menu");
+                """
+                        Rules
+                        Thank you for playing Tic-Tac-Toe!
+                        In Tic-Tac-Toe two players face off against each other.
+                        
+                        The aim of the game is to get three of your markers in a row,
+                        and at the same time make sure your opponent does not get three in a row.
+                        
+                        The game board is made up of a 3x3 grid of squares. Each square can be
+                        populated by one marker. Once a marker has been placed, it can not be changed.
+                        At the start of a round a coin toss determines which player starts placing
+                        their marker. The players then take turns placing markers until one of them
+                        gets three markers in a row or there are no more empty squares on the board.
+                        Once there are three identical markers in a row on a horizontal, vertical or
+                        diagonal line, that player wins and the round is finished.\s
+                        If neither player gets three in a row before the board is filled, the game
+                        ends in a draw.
+                        You can challenge a friend or play against the computer. If you decide to
+                        try to beat the computer, you can pick between two skill levels to face.
+                        
+                        Placing your marker is done by entering a number from 1 to 9. As shown in
+                        the schematic below:
+                        -------------
+                        | 1 | 2 | 3 |
+                        ----+---+----
+                        | 4 | 5 | 6 |
+                        ----+---+----
+                        | 7 | 8 | 9 |
+                        -------------
+                        
+                        
+                        0 - Return to main menu""");
         InputHandler.getIntInRange(0,0);
     }
 
