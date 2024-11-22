@@ -20,7 +20,8 @@ public class Game {
     }
 
     //This handles each round. After a round has finished a prompt appears to decide whether to keep playing or not.
-    // If no, return to main menu.
+    // If no, return to main menu. (Maybe this should have been placed in GameBoard, or a GameBoardService? Since
+    // it mostly invoke gameboard methods.)
     public void round(){
         boolean game = true;
         while(game) {
