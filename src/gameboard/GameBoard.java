@@ -8,6 +8,9 @@ public class GameBoard {
     List<String> separations = new ArrayList<>();
 
     // Adds instances of Square to fill a 3x3 grid to the grid List.
+    // (In retrospect, the Square class might have been a longer than necessary route to take. It might have sufficed
+    // having a list of chars, and checking if they were the default value or one of the markers. Oh well, at least I
+    // got the chance to practice working with objects. )
     public void generateGameBoard(){
         for(int i = 0; i <=8; i++){
             grid.add(new Square(' '));
@@ -17,6 +20,7 @@ public class GameBoard {
     }
 
     //Print a 3x3 grid. square() gets each individual square's marker-state to present a placed marker or empty square.
+
     public void printGameBoard() {
         System.out.println( "\n" + separations.get(1) +
                             "\n| " + square(0) + " | " + square(1) + " | " + square(2) + " |" +
