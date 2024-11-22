@@ -1,5 +1,7 @@
 package player;
 
+// This class is abstract, since I don't want any instances of Player. Each player is instead an instance of
+// either HumanPlayer or CPUPlayer, which both inherit Player.
 public abstract class Player {
     private String name;
     private int wins;
@@ -14,7 +16,6 @@ public abstract class Player {
         this.draws = 0;
         this.marker = marker;
     }
-
 
     public void increaseWins() {
         this.wins = this.wins+1;
@@ -47,7 +48,6 @@ public abstract class Player {
     public char getMarker() {
         return marker;
     }
-
 
     public String toString() {
         return "\nName: " + name +

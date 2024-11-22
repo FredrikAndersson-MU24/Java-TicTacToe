@@ -3,11 +3,11 @@ package utilities;
 import java.util.Random;
 import java.util.Scanner;
 
-public class InputHandler {
+public abstract class InputHandler {
 
     public static Scanner scanner = new Scanner(System.in);
 
-
+    // Returns a boolean.
     public static boolean getBoolean(){
         boolean result;
         while(true){
@@ -22,24 +22,21 @@ public class InputHandler {
             }
             System.out.println("Invalid input. Please enter Y(es) or N(o).");
         }
-
         return result;
     }
 
+    // Returns a string
     public static String getString(){
         return scanner.nextLine();
     }
 
-    public static int getMarkerPlacementAsInt(){
-        System.out.println("Enter marker placement as integer: ");
-            return getIntInRange(1,9);
-    }
-
+    // Returns a random integer in the specified range.
     public static int getRandomIntInRange(int min, int max){
         Random rand = new Random();
         return rand.nextInt(min, max+1);
     }
 
+    // Returns an integer in the specified range
     public static int getIntInRange(int min, int max){
         while(true){
             while(!scanner.hasNextInt()){
@@ -54,5 +51,4 @@ public class InputHandler {
             System.out.println("Invalid input. Please enter a valid integer.");
         }
     }
-
 }
