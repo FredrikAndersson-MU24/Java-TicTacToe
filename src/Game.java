@@ -105,7 +105,7 @@ public class Game {
     //          Misc.              //
     /////////////////////////////////
 
-    // A coin toss to see who starts the game
+    // A "coin toss" to see who starts the game
     public void randomizeStartingPlayer(){
         int random = InputHandler.getRandomIntInRange(0,1);
         if(random == 0){
