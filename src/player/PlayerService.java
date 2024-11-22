@@ -3,6 +3,7 @@ package player;
 import gameboard.GameBoard;
 import utilities.InputHandler;
 
+// This class is abstract, since I don't want any instances of it.
 public abstract class PlayerService {
 
     // Let the human player enter their name
@@ -47,7 +48,6 @@ public abstract class PlayerService {
         return marker;
     }
 
-
     // Handle the player placing their marker. Check if the square is occupied and place the marker if it is not.
     public static void placeMarker(GameBoard gameboard, Player currentPlayer, Player otherPlayer){
         System.out.println(currentPlayer.getName() + ", it is your turn.");
@@ -69,7 +69,7 @@ public abstract class PlayerService {
         }
     }
 
-    // Difficulty level
+    // Difficulty level selection when playing against CPU opponent
     public static boolean chooseDifficulty(){
         System.out.println("Please select CPU skill level: ");
         System.out.println("1 - Noob");
