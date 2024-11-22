@@ -3,10 +3,9 @@ package utilities;
 import java.util.Random;
 import java.util.Scanner;
 
-public class InputHandler {
+public abstract class InputHandler {
 
     public static Scanner scanner = new Scanner(System.in);
-
 
     public static boolean getBoolean(){
         boolean result;
@@ -22,17 +21,11 @@ public class InputHandler {
             }
             System.out.println("Invalid input. Please enter Y(es) or N(o).");
         }
-
         return result;
     }
 
     public static String getString(){
         return scanner.nextLine();
-    }
-
-    public static int getMarkerPlacementAsInt(){
-        System.out.println("Enter marker placement as integer: ");
-            return getIntInRange(1,9);
     }
 
     public static int getRandomIntInRange(int min, int max){

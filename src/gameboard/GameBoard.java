@@ -17,14 +17,14 @@ public class GameBoard {
     }
 
     //Print a 3x3 grid. square() gets each individual square's marker-state to present a placed marker or empty square.
-    public String printGameBoard() {
-        return  "\n" + separations.get(1) +
-                "\n| " + square(0) + " | " + square(1) + " | " + square(2) + " |" +
-                "\n" + separations.get(0) +
-                "\n| " + square(3) + " | " + square(4) + " | " + square(5) + " |" +
-                "\n" + separations.get(0) +
-                "\n| " + square(6) + " | " + square(7) + " | " + square(8) + " |" +
-                "\n" + separations.get(1);
+    public void printGameBoard() {
+        System.out.println( "\n" + separations.get(1) +
+                            "\n| " + square(0) + " | " + square(1) + " | " + square(2) + " |" +
+                            "\n" + separations.get(0) +
+                            "\n| " + square(3) + " | " + square(4) + " | " + square(5) + " |" +
+                            "\n" + separations.get(0) +
+                            "\n| " + square(6) + " | " + square(7) + " | " + square(8) + " |" +
+                            "\n" + separations.get(1));
     }
 
     public List<Square> getGrid() {
