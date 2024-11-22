@@ -1,19 +1,17 @@
 package player;
 
-public class Player {
+public abstract class Player {
     private String name;
     private int wins;
     private int losses;
     private int draws;
-    private String playerType;
     private char marker;
 
-    public Player(String name, String playerType, char marker) {
+    public Player(String name, char marker) {
         this.name = name;
         this.wins = 0;
         this.losses = 0;
         this.draws = 0;
-        this.playerType = playerType;
         this.marker = marker;
     }
 
@@ -53,7 +51,6 @@ public class Player {
     @Override
     public String toString() {
         return "\nName: " + name +
-                "\nPlayer type: " + playerType +
                 "\nWins: " + wins +
                 "\nLosses: " + losses +
                 "\nDraws: " + draws;

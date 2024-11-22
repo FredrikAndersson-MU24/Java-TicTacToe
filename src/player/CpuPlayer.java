@@ -8,7 +8,7 @@ import java.util.Random;
 public class CpuPlayer extends Player {
 
     public CpuPlayer(String name, char marker) {
-        super(name, "CPU", marker);
+        super(name, marker);
     }
 
     // The easier CPU opponent alternative. Places markers randomly.
