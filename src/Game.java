@@ -96,12 +96,12 @@ public class Game {
     // Determines if there are one or two human players
     public void setupPlayers(int numPlayers){
         if(numPlayers == 1){
-            player1 = new HumanPlayer(enterPlayerName("Player 1. "), 'X');
-            player2 = new CpuPlayer("CPU", '¤');
+            player1 = new HumanPlayer(enterPlayerName("Player 1. "), markerSelection(1));
+            player2 = new CpuPlayer("CPU", 'X');
         }
         if(numPlayers == 2){
-            player1 = new HumanPlayer(enterPlayerName("Player 1. "), 'X');
-            player2 = new HumanPlayer(enterPlayerName("Player 2. "), 'O');
+            player1 = new HumanPlayer(enterPlayerName("Player 1. "), markerSelection(1));
+            player2 = new HumanPlayer(enterPlayerName("Player 2. "), markerSelection(2));
         }
     }
 
@@ -213,5 +213,41 @@ public class Game {
                 break;
         }
         return bool;
+    }
+
+    // Marker selection. Lets the player choose their marker. Takes an int as argument to decide which if statement is
+    // used. As i have set it up player 1 gets to choose from the first if statement,
+    // player 2 from the second. CPU1 and CPU2 has hardcoded markers.
+    public char markerSelection(int i){
+        char marker = 0;
+        int choice;
+        System.out.println("Select your marker:");
+        if(i == 1){
+            System.out.println("1 - O");
+            System.out.println("2 - @");
+            System.out.println("3 - C");
+            choice = InputHandler.getIntInRange(1,3);
+            // Apparently this is a way to write a switch statement aswell (IntelliJ suggested it).
+            // When it's a simple statement like this, I think it looks a lot cleaner.
+            marker = switch (choice) {
+                case 1 -> 'O';
+                case 2 -> '@';
+                case 3 -> 'C';
+                default -> marker;
+            };
+            }
+        if(i == 2) {
+            System.out.println("1 - X");
+            System.out.println("2 - &");
+            System.out.println("3 - %");
+            choice = InputHandler.getIntInRange(1,3);
+            marker = switch (choice) {
+                case 1 -> 'X';
+                case 2 -> '&';
+                case 3 -> '%';
+                default -> marker;
+            };
+            }
+        return marker;
     }
 }
