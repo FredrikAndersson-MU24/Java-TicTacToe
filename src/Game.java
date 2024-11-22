@@ -66,11 +66,7 @@ public class Game {
             gameboard.getGrid().get(placement-1).toggleOccupied();
         }
         if(currentPlayer instanceof CpuPlayer){
-            if(difficulty){
-                ((CpuPlayer) currentPlayer).easyMode(gameboard, currentPlayer.getMarker());
-            } else {
-                ((CpuPlayer) currentPlayer).hardMode(gameboard, currentPlayer.getMarker(), otherPlayer.getMarker());
-            }
+            ((CpuPlayer) currentPlayer).placeMarker(gameboard, otherPlayer);
         }
     }
 
@@ -98,7 +94,7 @@ public class Game {
     public void setupPlayers(int numPlayers){
         if(numPlayers == 1){
             player1 = new HumanPlayer(enterPlayerName("Player 1. "), markerSelection(1));
-            player2 = new CpuPlayer("CPU", 'X');
+            player2 = new CpuPlayer("CPU", 'X', chooseDifficulty());
         }
         if(numPlayers == 2){
             player1 = new HumanPlayer(enterPlayerName("Player 1. "), markerSelection(1));
@@ -175,16 +171,18 @@ public class Game {
         switch(choice){
             case 1:
                 setupPlayers(1);
-                difficulty = chooseDifficulty();
+//                difficulty = chooseDifficulty();
                 round();
                 break;
             case 2:
                 setupPlayers(2);
                 round();
                 break;
+// This was intended for testing purposes, to work out kinks in the hardMode method, but I kept it to show the
+// difference between the "difficulty" levels if you put Easy vs Hard for example.
             case 3:
-                player1 = new CpuPlayer("CPU 1", 'O');
-                player2 = new CpuPlayer("CPU 2", 'X');
+                player1 = new CpuPlayer("CPU 1", 'O', chooseDifficulty());
+                player2 = new CpuPlayer("CPU 2", 'X', chooseDifficulty());
                 round();
                 break;
             case 0:
@@ -200,17 +198,17 @@ public class Game {
 
     // Difficulty level
     public boolean chooseDifficulty(){
-        System.out.println("Please select difficulty level:");
-        System.out.println("1 - Easy");
-        System.out.println("2 - Hard");
+        System.out.println("Please select CPU skill level: ");
+        System.out.println("1 - Noob");
+        System.out.println("2 - Pro");
         int i = InputHandler.getIntInRange(1,2);
-        boolean bool = true;
+        boolean bool = false;
         switch(i){
             case 1:
-                bool = true;
+                bool = false;
                 break;
             case 2:
-                bool = false;
+                bool = true;
                 break;
         }
         return bool;

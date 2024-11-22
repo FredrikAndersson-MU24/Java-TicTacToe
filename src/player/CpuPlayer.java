@@ -7,8 +7,22 @@ import java.util.Random;
 
 public class CpuPlayer extends Player {
 
-    public CpuPlayer(String name, char marker) {
+    private boolean proLevel;
+
+
+    //Constructor for human vs cpu
+    public CpuPlayer(String name, char marker, boolean proLevel) {
         super(name, marker);
+        this.proLevel = proLevel;
+    }
+
+    //
+    public void placeMarker(GameBoard gameboard, Player otherPlayer){
+        if(proLevel){
+            hardMode(gameboard, this.getMarker(), otherPlayer.getMarker());
+        } else {
+            easyMode(gameboard, this.getMarker());
+        }
     }
 
     // The easier CPU opponent alternative. Places markers randomly.
