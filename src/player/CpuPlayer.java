@@ -10,23 +10,23 @@ public class CpuPlayer extends Player {
     private boolean proLevel;
 
 
-    //Constructor for human vs cpu
+    // Constructor for the CPUPlayer
     public CpuPlayer(String name, char marker, boolean proLevel) {
         super(name, marker);
         this.proLevel = proLevel;
     }
 
-    //
+    // This method is invoked on every CPU players turn, it checks which "skill" level the CPU player should use
     public void placeMarker(GameBoard gameboard, Player otherPlayer){
         if(proLevel){
-            hardMode(gameboard, this.getMarker(), otherPlayer.getMarker());
+            proLevel(gameboard, this.getMarker(), otherPlayer.getMarker());
         } else {
-            easyMode(gameboard, this.getMarker());
+            noobLevel(gameboard, this.getMarker());
         }
     }
 
-    // The easier CPU opponent alternative. Places markers randomly.
-    public void easyMode(GameBoard gameboard, char thisMarker) {
+    // The easier CPU opponent alternative. Places markers randomly. Invoked from placeMarker().
+    public void noobLevel(GameBoard gameboard, char thisMarker) {
         randomPlacement(gameboard, thisMarker);
     }
 
@@ -35,10 +35,11 @@ public class CpuPlayer extends Player {
     //  that tries to win, rather than just randomly placing markers.           //
     //  It's a mess :D                                                          //
     //  But as far as I've managed to test it it seems to work.                 //
-    //  Strategy from the tic-tac-toe wikipedia page.                           //
-    //  This could probably be cleaned up significantly with smarter methods.   //
+    //  "Strategy" from the tic-tac-toe wikipedia page.                         //
+    //  This could be cleaned up significantly with smarter methods.            //
+    //  Invoked from placeMarker().                                             //
     //////////////////////////////////////////////////////////////////////////////
-    public void hardMode(GameBoard gameboard, char thisMarker, char otherMarker) {
+    public void proLevel(GameBoard gameboard, char thisMarker, char otherMarker) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < gameboard.getGrid().size(); i++) {
             if (!gameboard.getGrid().get(i).isOccupied()) {
@@ -202,6 +203,7 @@ public class CpuPlayer extends Player {
             }
         }
         // Fifth turn
+        // Checks which square is the last one, and places the marker there
         if (list.size() == 1) {
             int j = 0;
             for (int i = 0; i < gameboard.getGrid().size(); i++) {
@@ -209,7 +211,6 @@ public class CpuPlayer extends Player {
                     j = gameboard.getGrid().indexOf(gameboard.getGrid().get(i));
                 }
             }
-            System.out.println(j);
             setMarkerAndToggle(gameboard, j, thisMarker);
         }
 
@@ -407,16 +408,24 @@ public class CpuPlayer extends Player {
         return !gameboard.getGrid().get(num).isOccupied();
     }
 
+    // Checks two squares if they are both occupied by the specified marker
     public boolean twoOccupiedAnd(GameBoard gameboard, int first, int second, char marker){
-        return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker);
+        return  isOccupiedBy(gameboard, first, marker) &&
+                isOccupiedBy(gameboard, second, marker);
     }
 
+    // Checks two squares if they are both occupied by the specified marker and if the "third in a row"
+    // square is unoccupied. Used both for placing a players third to win or prevent the other player of
+    // placing their third.
     public boolean twoOccupiedOneNotAnd(GameBoard gameboard, int first, int second, int third, char marker){
-        return isOccupiedBy(gameboard, first, marker) && isOccupiedBy(gameboard, second, marker) && notOccupied(gameboard, third);
+        return  isOccupiedBy(gameboard, first, marker) &&
+                isOccupiedBy(gameboard, second, marker) &&
+                notOccupied(gameboard, third);
     }
 
     // This is used to randomly place marker depending on which squares are left unoccupied.
-    // Used in easyMode() and as a last resort in the fourth turn if CPU starts second, as draw should be the only possibility
+    // Used in noobLevel() and as a last resort in the fourth turn if CPU starts second, as draw should be the only
+    // possibility
     public void randomPlacement(GameBoard gameboard, char thisMarker) {
         List<Integer> remains = new ArrayList<>();
         for (int i = 0; i < gameboard.getGrid().size(); i++) {
