@@ -52,8 +52,9 @@ public class Game {
         System.out.println("1 - Human vs CPU");
         System.out.println("2 - Human vs Human");
         System.out.println("3 - CPU vs CPU");
+        System.out.println("4 - Rules");
         System.out.println("0 - Quit");
-        int choice = InputHandler.getIntInRange(0,3);
+        int choice = InputHandler.getIntInRange(0,4);
         switch(choice){
             case 1:
                 player1 = new HumanPlayer(PlayerService.inputName("Player 1. "), PlayerService.markerSelection(1));
@@ -71,6 +72,9 @@ public class Game {
                 player1 = new CpuPlayer("CPU 1", 'O', PlayerService.chooseDifficulty());
                 player2 = new CpuPlayer("CPU 2", 'X', PlayerService.chooseDifficulty());
                 round();
+                break;
+            case 4:
+                rules();
                 break;
             case 0:
                 mainMenu = false;
@@ -146,4 +150,38 @@ public class Game {
         }
         return running;
     }
+
+
+    // Rules
+    public void rules(){
+        System.out.println(
+                "Rules\n" +
+                "Thank you for playing Tic-Tac-Toe!\n" +
+                "In Tic-Tac-Toe two players face off against each other. " +
+                "\nThe aim of the game is to get three of your markers in a row,\n" +
+                "and at the same time make sure your opponent does not get three in a row.\n" +
+                "\nThe game board is made up of a 3x3 grid of squares. Each square can be \n" +
+                "populated by one marker. Once a marker has been placed, it can not be changed.\n" +
+                "At the start of a round a coin toss determines which player starts placing \n" +
+                "their marker. The players then take turns placing markers until one of them\n" +
+                "gets three markers in a row or there are no more empty squares on the board. \n" +
+                "Once there are three identical markers in a row on a horizontal, vertical or \n" +
+                "diagonal line, that player wins and the round is finished. \n" +
+                "If neither player gets three in a row before the board is filled, the game \n" +
+                "ends in a draw.\n" +
+                "You can challenge a friend or play against the computer. If you decide to \n" +
+                "try to beat the computer, you can pick between two skill levels to face.\n" +
+                "\nPlacing your marker is done by entering a number from 1 to 9. \n" +
+                "See the schematic below:" +
+                "\n-------------" +
+                "\n| 1 | 2 | 3 |" +
+                "\n----+---+----" +
+                "\n| 4 | 5 | 6 |" +
+                "\n----+---+----" +
+                "\n| 7 | 8 | 9 |" +
+                "\n-------------" +
+                "\n\n0 - Return to main menu");
+        InputHandler.getIntInRange(0,0);
+    }
+
 }
