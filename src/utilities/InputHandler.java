@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public abstract class InputHandler {
 
-    public static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     // Returns a boolean.
     public static boolean getBoolean(){
