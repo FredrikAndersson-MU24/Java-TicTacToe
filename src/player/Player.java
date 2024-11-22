@@ -48,7 +48,7 @@ public abstract class Player {
         return marker;
     }
 
-    @Override
+
     public String toString() {
         return "\nName: " + name +
                 "\nWins: " + wins +
