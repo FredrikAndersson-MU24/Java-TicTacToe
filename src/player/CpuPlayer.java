@@ -9,7 +9,6 @@ public class CpuPlayer extends Player {
 
     private boolean proLevel;
 
-
     // Constructor for the CPUPlayer
     public CpuPlayer(String name, char marker, boolean proLevel) {
         super(name, marker);
