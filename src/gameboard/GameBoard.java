@@ -50,30 +50,45 @@ public class GameBoard {
     //Checks if the most recent input resulted in the player getting three in a row. Returns true if it is a win
     public boolean checkIfWin(char marker){
         boolean isWin = false;
-        //Row 1
-        if(isARow(0,1,2, marker)){
-            isWin = true;
+        // Check rows
+        for(int i = 0; i <=6; i+= 3){
+            if(isARow(i,i+1,i+2, marker)) {
+                isWin = true;
+                break;
+            }
         }
-        //Row 2
-        if(isARow(3,4,5, marker)){
-            isWin = true;
+        // Check Columns
+        for(int i = 0; i <=2; i++){
+            if(isARow(i,i+3,i+6, marker)) {
+                isWin = true;
+                break;
+            }
         }
-        //Row 3
-        if(isARow(6,7,8, marker)){
-            isWin = true;
-        }
-        //Column 1
-        if(isARow(0,3,6, marker)){
-            isWin = true;
-        }
-        //Column 2
-        if(isARow(1,4,7, marker)){
-            isWin = true;
-        }
-        //Column 3
-        if(isARow(2,5,8, marker)){
-            isWin = true;
-        }
+//
+//        //Row 1
+//        if(isARow(0,1,2, marker)){
+//            isWin = true;
+//        }
+//        //Row 2
+//        if(isARow(3,4,5, marker)){
+//            isWin = true;
+//        }
+//        //Row 3
+//        if(isARow(6,7,8, marker)){
+//            isWin = true;
+//        }
+//        //Column 1
+//        if(isARow(0,3,6, marker)){
+//            isWin = true;
+//        }
+//        //Column 2
+//        if(isARow(1,4,7, marker)){
+//            isWin = true;
+//        }
+//        //Column 3
+//        if(isARow(2,5,8, marker)){
+//            isWin = true;
+//        }
         //Diagonal from upper left
         if(isARow(0,4,8, marker)){
             isWin = true;
@@ -94,6 +109,18 @@ public class GameBoard {
     // Increases readability for printGameBoard().
     public char square(int num){
     return grid.get(num).getMarker();
+    }
+
+    // Create a list of available squares, used to check which turn the game is in to determine if the CPU
+    // starts first or second
+    public int getOccupied(){
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < getGrid().size(); i++) {
+            if (!getGrid().get(i).isOccupied()) {
+                list.add(i);
+            }
+        }
+        return list.size();
     }
 
 }
